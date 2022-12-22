@@ -8,8 +8,9 @@ function getComputerChoice() {
 }
 
 function playRound(playerSelection, computerSelection) {
-  playerSelection = prompt("Type rock, paper or scissors:").toLowerCase();
+  console.log(playerSelection);
   computerSelection = getComputerChoice();
+  console.log(computerSelection);
   if (computerSelection == playerSelection) {
     return "Tie game!";
   } else if (
@@ -21,10 +22,21 @@ function playRound(playerSelection, computerSelection) {
   } else return `You Win! ${playerSelection} beats ${computerSelection}`;
 }
 
-function game() {
-  for (let i = 0; i < 5; i++) {
-    console.log(playRound());
-  }
-}
+const buttons = document.querySelectorAll("button");
 
-game();
+buttons.forEach((button) => {
+  button.addEventListener("click", () => {
+    if (button.id == 1) {
+      const div = document.createElement("div");
+      const head1 = document.createElement("h3");
+      head1.textContent = `Result ${playRound("paper", getComputerChoice())}`;
+      div.appendChild(head1);
+      document.body.insertBefore(div, null);
+      console.log(playRound("paper", getComputerChoice()));
+    } else if (button.id == 2) {
+      console.log(playRound("rock", getComputerChoice()));
+    } else {
+      console.log(playRound("scissors", getComputerChoice()));
+    }
+  });
+});
